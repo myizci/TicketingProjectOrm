@@ -1,45 +1,43 @@
-package com.cydeo.dto;
+package com.cydeo.entity;
 
+import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProjectDTO {
+@Table(name = "projects")
+public class Project extends BaseEntity{
 
-    @NotBlank
     private String projectName;
 
-    @NotBlank
     private String projectCode;
 
-    @NotNull
-    private UserDTO assignedManager;
+    @OneToMany
+    private List<User> assignedManager;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private LocalDate startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
+
     private LocalDate endDate;
 
-    @NotBlank
     private String projectDetail;
 
     private Status projectStatus;
-
-    private int completeTaskCounts;
-    private int unfinishedTaskCounts;
-
-
-
 }

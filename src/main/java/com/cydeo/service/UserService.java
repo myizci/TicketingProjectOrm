@@ -18,5 +18,8 @@ public interface UserService  {
 
     void deleteByUserName(String username);
 
+    void delete(String username);
 
+
+    List<UserDTO> findManagers();
 }
