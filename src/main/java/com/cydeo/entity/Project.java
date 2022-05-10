@@ -24,7 +24,8 @@ public class Project extends BaseEntity{
 
     private String projectCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
     private User assignedManager;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -36,5 +37,6 @@ public class Project extends BaseEntity{
 
     private String projectDetail;
 
+    @Enumerated(EnumType.STRING)
     private Status projectStatus;
 }
