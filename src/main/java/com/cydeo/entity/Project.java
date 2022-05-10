@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -27,8 +24,8 @@ public class Project extends BaseEntity{
 
     private String projectCode;
 
-    @OneToMany
-    private List<User> assignedManager;
+    @ManyToOne
+    private User assignedManager;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
