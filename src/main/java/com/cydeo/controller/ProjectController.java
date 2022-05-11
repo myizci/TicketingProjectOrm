@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping("/project")
 public class ProjectController {
 
-    ProjectService projectService;
-    UserService userService;
+   private final ProjectService projectService;
+   private final UserService userService;
 
     public ProjectController(ProjectService projectService, UserService userService) {
         this.projectService = projectService;
@@ -29,7 +29,7 @@ public class ProjectController {
 
         model.addAttribute("project", new ProjectDTO());
         model.addAttribute("projects", projectService.listAllProjects());
-        model.addAttribute("managers", userService.findManagers());
+        model.addAttribute("managers", userService.listAllByRole("manager"));
 
         return "/project/create";
 
@@ -41,7 +41,7 @@ public class ProjectController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("projects", projectService.listAllProjects());
-            model.addAttribute("managers", userService.findManagers());
+            model.addAttribute("managers", userService.listAllByRole("manager"));
 
             return "/project/create";
 
@@ -52,17 +52,17 @@ public class ProjectController {
 
     }
 
-//    @GetMapping("/delete/{projectcode}")
-//    public String deleteProject(@PathVariable("projectcode") String projectcode) {
-//        projectService.deleteById(projectcode);
-//        return "redirect:/project/create";
-//    }
-//
-//    @GetMapping("/complete/{projectcode}")
-//    public String completeProject(@PathVariable("projectcode") String projectcode) {
-//        projectService.complete(projectService.findById(projectcode));
-//        return "redirect:/project/create";
-//    }
+    @GetMapping("/delete/{projectcode}")
+    public String deleteProject(@PathVariable("projectcode") String projectcode) {
+        projectService.delete(projectcode);
+        return "redirect:/project/create";
+    }
+
+    @GetMapping("/complete/{projectcode}")
+    public String completeProject(@PathVariable("projectcode") String projectcode) {
+        projectService.complete(projectcode);
+        return "redirect:/project/create";
+    }
 //
 //    @GetMapping("/update/{projectcode}")
 //    public String editProject(@PathVariable("projectcode") String projectcode, Model model) {

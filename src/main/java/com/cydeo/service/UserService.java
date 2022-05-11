@@ -21,5 +21,5 @@ public interface UserService  {
     void delete(String username);
 
 
-    List<UserDTO> findManagers();
+    List<UserDTO> listAllByRole(String role);
 }

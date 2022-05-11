@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> findManagers() {
-        return listAllUsers().stream().filter(user->user.getRole().getDescription()
-                .equals("Manager")).collect(Collectors.toList());
+    public List<UserDTO> listAllByRole(String role) {
+        List<User> users= userRepository.findAllByRoleDescriptionIgnoreCase(role);
+        return users.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
 }
