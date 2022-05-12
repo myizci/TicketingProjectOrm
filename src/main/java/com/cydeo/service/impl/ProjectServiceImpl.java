@@ -27,7 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectDTO> listAllProjects() {
         List<Project> projects = projectRepository.findAll();
 
-        return projects.stream().map(projectMapper::convertToDTO).collect(Collectors.toList());
+        return projects.stream().map(projectMapper::convertToDto).collect(Collectors.toList());
 
     }
 
@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO getByProjectCode(String code) {
-        return projectMapper.convertToDTO(projectRepository.findByProjectCode(code));
+        return projectMapper.convertToDto(projectRepository.findByProjectCode(code));
     }
 
     @Override

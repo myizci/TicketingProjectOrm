@@ -7,18 +7,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProjectMapper {
-   private final ModelMapper modelMapper;
+
+    ModelMapper modelMapper;
 
     public ProjectMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+        this.modelMapper = modelMapper; // map method map(parameter, Target.class)
     }
+
+    // dto to entity
+
 
     public Project convertToEntity(ProjectDTO dto){
-
-        return modelMapper.map(dto,Project.class);
+      return   modelMapper.map(dto,Project.class);
     }
 
-    public ProjectDTO convertToDTO(Project entity){
-        return modelMapper.map(entity, ProjectDTO.class);
+    //entity to dto
+
+    public ProjectDTO convertToDto(Project entity){
+
+        return modelMapper.map(entity,ProjectDTO.class);
     }
+
+
 }
