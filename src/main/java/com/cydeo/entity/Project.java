@@ -2,9 +2,7 @@ package com.cydeo.entity;
 
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,8 +14,8 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Table(name = "projects")
 @Where(clause = "is_deleted=false")
 public class Project extends BaseEntity{
@@ -42,3 +40,5 @@ public class Project extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Status projectStatus;
 }
+
+

@@ -8,4 +8,8 @@ public interface TaskService {
 
 
     List<TaskDTO> listAllTasks();
+
+    void save(TaskDTO dto);
+
+
 }
