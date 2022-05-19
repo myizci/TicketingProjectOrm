@@ -91,23 +91,40 @@ public class ProjectController {
         return "redirect:/project/create";
 
     }
-//
-//    @GetMapping("/manager/project-status")
-//    public String getProjectByManager(Model model) {
-//
-//        UserDTO manager = userService.findById("john@cydeo.com");
-//
-//        List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
-//
-//        model.addAttribute("projects", projects);
-//
-//        return "/manager/project-status";
-//    }
-//
-//    @GetMapping("/manager/complete/{projectCode}")
-//    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
-//        projectService.complete(projectService.findById(projectCode));
-//        return "redirect:/project/manager/project-status";
-//    }
+
+    /*
+     @GetMapping("/manager/project-status")
+    public String getProjectByManager(Model model) {
+
+       List<ProjectDTO> projects = projectService.listAllProjectDetails();
+       // this method brings all projects for a hard coded manager...
+
+        model.addAttribute("projects", projects);
+
+        return "/manager/project-status";
+    }
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectCode);
+        return "redirect:/project/manager/project-status";
+    }
+     */
+    @GetMapping("/manager/project-status")
+    public String getProjectByManager(Model model) {
+
+        List<ProjectDTO> projects = projectService.listAllProjectDetails(); // this is a method
+        // to pull all projects for a certain manager
+     model.addAttribute("projects",projects);
+
+
+        return "/manager/project-status";
+    }
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectCode);
+        return "redirect:/project/manager/project-status";
+    }
 
 }

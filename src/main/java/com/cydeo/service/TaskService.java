@@ -21,4 +21,12 @@ public interface TaskService {
 
 
     List<TaskDTO> findAllTasksByStatusIsNot(Status status);
+
+    void updateStatus(TaskDTO dto);
+
+    List<TaskDTO> findAllTasksByStatus(Status status);
+
+    int totalCompleteTask(String projectCode);
+
+    int totalUncompletedTask(String projectCode);
 }

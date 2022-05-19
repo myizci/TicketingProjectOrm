@@ -18,6 +18,10 @@ public interface ProjectService {
     void delete(String code);
 
     void complete(String projectcode);
+
+    ProjectDTO findById(String projectCode);
+
+    List<ProjectDTO> listAllProjectDetails();
 }
 
 

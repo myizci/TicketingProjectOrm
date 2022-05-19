@@ -113,28 +113,28 @@ public class TaskController {
         return "task/status-update";
 
     }
-//
-//    @PostMapping("/employee/update/{id}")
-//    public String employeeUpdateTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//
-//            model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
-//            model.addAttribute("statuses", Status.values());
-//
-//            return "/task/status-update";
-//
-//        }
-//
-//        taskService.updateStatus(task);
-//        return "redirect:/task/employee/pending-tasks";
-//
-//    }
-//
-//    @GetMapping("/employee/archive")
-//    public String employeeArchivedTasks(Model model) {
-//        model.addAttribute("tasks", taskService.findAllTasksByStatus(Status.COMPLETE));
-//        return "task/archive";
-//    }
+
+    @PostMapping("/employee/update/{id}")
+    public String employeeUpdateTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
+            model.addAttribute("statuses", Status.values());
+
+            return "/task/status-update";
+
+        }
+
+        taskService.updateStatus(task);
+        return "redirect:/task/employee/pending-tasks";
+
+    }
+
+    @GetMapping("/employee/archive")
+    public String employeeArchivedTasks(Model model) {
+        model.addAttribute("tasks", taskService.findAllTasksByStatus(Status.COMPLETE));
+        return "task/archive";
+    }
 
 }

@@ -123,5 +123,32 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    @Override
+    public void updateStatus(TaskDTO dto) {
+
+        Optional<Task> task = taskRepository.findById(dto.getId()); // this is not Task object, it is Optional , from DB
+        if(task.isPresent()){
+            task.get().setTaskStatus(dto.getTaskStatus());
+            taskRepository.save(task.get());
+        }
+    }
+
+    @Override
+    public List<TaskDTO> findAllTasksByStatus(Status status) {
+        List<Task> list= taskRepository.findAllByTaskStatus(Status.COMPLETE);
+
+      return   list.stream().map(taskMapper::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public int totalCompleteTask(String projectCode) {
+        return taskRepository.totalCompletedTasks(projectCode);
+    }
+
+    @Override
+    public int totalUncompletedTask(String projectCode) {
+        return taskRepository.totalNonCompletedTasks(projectCode);
+    }
+
 
 }

@@ -22,4 +22,6 @@ public interface UserService  {
 
 
     List<UserDTO> listAllByRole(String role);
+
+    UserDTO findById(String userName);
 }
