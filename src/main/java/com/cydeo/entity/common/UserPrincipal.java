@@ -11,7 +11,6 @@ import java.util.List;
 
 public class UserPrincipal implements UserDetails {
 
-
     private User user;
 
     public UserPrincipal(User user) {
@@ -24,17 +23,21 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
         GrantedAuthority authority = new SimpleGrantedAuthority(this.user.getRole().getDescription());
+
         authorityList.add(authority);
+
         return authorityList;
     }
 
     @Override
     public String getPassword() {
+
         return this.user.getPassWord();
     }
 
     @Override
     public String getUsername() {
+
         return this.user.getUserName();
     }
 
