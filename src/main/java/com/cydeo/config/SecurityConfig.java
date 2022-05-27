@@ -28,7 +28,7 @@ public class SecurityConfig {
         this.authSuccessHandler = authSuccessHandler;
     }
 
-    //    @Bean
+//    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder encoder){
 //
 //
@@ -50,9 +50,9 @@ public class SecurityConfig {
                 .authorizeRequests()
 //                .antMatchers("/user/**").hasRole("Admin")
                 .antMatchers("/user/**").hasAuthority("Admin")
-                .antMatchers("/project/**").hasRole("Manager")
-                .antMatchers("/task/employee/**").hasRole("Employee")
-                .antMatchers("/task/**").hasRole("Manager")
+                .antMatchers("/project/**").hasAuthority("Manager")
+                .antMatchers("/task/employee/**").hasAuthority("Employee")
+                .antMatchers("/task/**").hasAuthority("Manager")
 //                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
 //                .antMatchers("task/**").hasAuthority("ROLE_EMPLOYEE")
 
@@ -68,7 +68,7 @@ public class SecurityConfig {
 //                .httpBasic()
                 .formLogin()
                 .loginPage("/login")
-               // .defaultSuccessUrl("/welcome")
+//                    .defaultSuccessUrl("/welcome")
                 .successHandler(authSuccessHandler)
                 .failureUrl("/login?error=true")
                 .permitAll()
@@ -84,6 +84,20 @@ public class SecurityConfig {
                 .and().build();
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
