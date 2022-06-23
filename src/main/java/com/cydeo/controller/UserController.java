@@ -24,28 +24,36 @@ public class UserController {
     public ResponseEntity<ResponseWrapper> getUsers() {
         List<UserDTO> userDTOList = userService.listAllUsers();
 
-        return ResponseEntity.ok(new ResponseWrapper("Users are successfully retrieved",userDTOList, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Users are successfully retrieved", userDTOList, HttpStatus.OK));
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<ResponseWrapper> getUserByUserName(@PathVariable("userName") String userName){
+    public ResponseEntity<ResponseWrapper> getUserByUserName(@PathVariable("userName") String userName) {
 
         UserDTO userDTO = userService.findByUserName(userName);
-        return ResponseEntity.ok(new ResponseWrapper("User successfully retrieved",userDTO, HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("User successfully retrieved", userDTO, HttpStatus.OK));
 
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper> createUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<ResponseWrapper> createUser(@RequestBody UserDTO userDTO) {
         userService.save(userDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("User successfully created",HttpStatus.CREATED));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("User successfully created", HttpStatus.CREATED));
+    }
+
+    @PutMapping
+    public ResponseEntity<ResponseWrapper> updateUser(@RequestBody UserDTO userDTO){
+        userService.update(userDTO);
+        return ResponseEntity.ok(new ResponseWrapper("User successfully update",userDTO,HttpStatus.OK));
     }
 
 
 
-
-
-
-
+    @DeleteMapping("/{userName}")
+    public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("userName") String userName){
+        userService.deleteByUserName(userName);
+       return ResponseEntity.ok(new ResponseWrapper("user successfully deleted",HttpStatus.OK));
+      //  return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ResponseWrapper("User successfully deleted",H)); // 204
+    }
 }
