@@ -58,7 +58,7 @@ public class UserController {
     @DeleteMapping("/{userName}")
     @RolesAllowed("Admin")
     public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("userName") String userName){
-        userService.deleteByUserName(userName);
+        userService.delete(userName);
        return ResponseEntity.ok(new ResponseWrapper("user successfully deleted",HttpStatus.OK));
       //  return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ResponseWrapper("User successfully deleted",H)); // 204
     }
