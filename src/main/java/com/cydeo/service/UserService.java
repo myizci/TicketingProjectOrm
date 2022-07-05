@@ -3,6 +3,7 @@ package com.cydeo.service;
 
 import com.cydeo.dto.UserDTO;
 import com.cydeo.entity.User;
+import com.cydeo.exception.TicketingProjectException;
 
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UserService  {
 
     void deleteByUserName(String username);
 
-    void delete(String username);
+    void delete(String username) throws TicketingProjectException;
 
 
     List<UserDTO> listAllByRole(String role);
